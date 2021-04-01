@@ -1,19 +1,4 @@
 <?php
-/* Сделайте класс User, в котором будут следующие protected поля -
- * name (имя), age (возраст), public методы setName, getName, setAge, getAge.
- *
- * Сделайте класс Worker, который наследует от класса User и вносит дополнительное private поле salary (зарплата),
- * а также методы public getSalary и setSalary.
- *
- * Создайте объект этого класса 'Иван', возраст 25, зарплата 1000. Создайте
- * второй объект этого класса 'Вася', возраст 26, зарплата 2000. Найдите сумму зарплата Ивана и Васи.
- *
- * Сделайте класс Student, который наследует от класса User
- * и вносит дополнительные private поля стипендия, курс, а также геттеры и сеттеры для них.
- *
- * Сделайте класс Driver (Водитель), который будет наследоваться от класса Worker из предыдущей задачи.
- * Этот метод должен вносить следующие private поля: водительский стаж, категория вождения (A, B, C).*/
-
 
 /*
  * Сделайте класс User, в котором будут следующие protected поля -
@@ -41,7 +26,7 @@ class User {
  * а также методы public getSalary и setSalary.
  */
 class Worker extends User{
-    private $salary;
+    protected $salary;
 
     public function setSalary($salary){
         $this->salary = $salary;
@@ -51,48 +36,45 @@ class Worker extends User{
     }
 }
 
-/*
- * Сделайте класс Student, который наследует от класса User
- * и вносит дополнительные private поля стипендия, курс, а также геттеры и сеттеры для них.
- */
 
-class Student extends User{
-    private $scholarship, $yearuniversity;
+class Builder extends Worker{
+    public static $count = 0;   // статическое свойство с кол-вом строителей
 
-    public function setScholarship($scholarship){
-        $this->scholarship = $scholarship;
-    }
-    public function getScholarship(){
-        return $this->scholarship;
+    public function set($name, $age){ // переопределяем функцию из родительского класса
+        $this->name = $name;
+        $this->age = $age;
+        self::$count++;  // увеличиваем кол-во на 1
     }
 
-    public function setYearuniversity($yearuniversity){
-        $this->yearuniversity = $yearuniversity;
+    public function get(){
+        return $this->name.' '.$this->age; // выводим строителя
     }
-    public function getYearuniversity(){
-        return $this->yearuniversity;
-    }
+
 }
 
-/*
- * Сделайте класс Driver (Водитель), который будет наследоваться от класса Worker из предыдущей задачи.
- * Этот метод должен вносить следующие private поля: водительский стаж, категория вождения (A, B, C).
- */
 
-class Driver extends Worker{
-    private $drivingExperience, $category;
 
-    public function setDrivingExperience($drivingExperience){
-        $this->drivingExperience = $drivingExperience;
-    }
-    public function getDrivingExperience(){
-        return $this->drivingExperience;
-    }
 
-    public function setCategory($category){
-        $this->category = $category;
-    }
-    public function getCategory(){
-        return $this->category;
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

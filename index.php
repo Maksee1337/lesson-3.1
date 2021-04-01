@@ -1,19 +1,18 @@
 <?php
 
-include "person.php";
+include "user.php";
 
-    $user[] = new person(); // создаем массив с объектами
-    $user[] = new person();
-    $user[] = new person();
+    $builders[] = new Builder();
+    $builders[] = new Builder();
+    $builders[] = new Builder();
 
-    // заполняем объекты данными
-    $user[0]->set("Ivan", "Ivanov", "12.12.2012", "Las Venturas");
-    $user[1]->set("Vadim", "Vadimov", "01.01.1900", "San Fierro");
-    $user[2]->set("Trevor", "Philips", "05.03.1968", "San Andreas");
+    $builders[0]->set('Ivan', 25);
+    $builders[1]->set('David', 22);
+    $builders[2]->set('Svetlana', 29);
 
-    foreach ($user as $value){ // вывод каждого объекта
-        echo $value->get()."\n";
+
+    for($i = 0 ; $i < Builder::$count ; $i++){
+        echo $builders[$i]->get()."\n";
     }
-
-    // вывод объекта в другом формате
-    echo "\n".$user[0]->get("%lastname% %firstname%. %city%, %dob%");
+    echo 'Кол-во строителей: '. Builder::$count;
+//var_dump($builders);
