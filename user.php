@@ -37,17 +37,22 @@ class Worker extends User{
 }
 
 
-class Builder extends Worker{
+class Builder {
     public static $count = 0;   // статическое свойство с кол-вом строителей
+    protected $builders;        //
 
-    public function set($name, $age){ // переопределяем функцию из родительского класса
-        $this->name = $name;
-        $this->age = $age;
-        self::$count++;  // увеличиваем кол-во на 1
+    public function add($name, $age){ // метод добавляем объект User в массив builders
+       $this->builders[self::$count] = new User();
+       $this->builders[self::$count]->setName($name);
+       $this->builders[self::$count]->setAge($age);
+       self::$count++;  // увеличиваем кол-во на 1
     }
 
-    public function get(){
-        return $this->name.' '.$this->age; // выводим строителя
+    public function getBuilder($index){
+        if(self::$count > 0 && $index < self::$count) { // по сути эта проверка не имеет смысла. надо учитывать чтоб в коде запрашиваем элемент существовал
+            return $this->builders[$index]->getName().';'.$this->builders[$index]->getAge();
+        }
     }
+
 
 }
